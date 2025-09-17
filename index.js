@@ -33,6 +33,23 @@ async function run() {
     // Connect the client to the server	(optional starting in v4.7)
     await client.connect();
 
+    // amar bakend
+
+    const coffeeCollection = client.db('coffeeDB').collection('coffees')
+
+    app.get('/coffees', async(req, res) =>{
+      const result = await coffeeCollection.find().toArray();
+      res.send(result);
+    })
+
+    app.post('/coffees',async(req, res) =>{
+      const NewCoffee = req.body;
+      console.log(NewCoffee);
+     const result = await coffeeCollection.insertOne(NewCoffee);
+     res.send(result);
+    })
+
+
 
 
 
